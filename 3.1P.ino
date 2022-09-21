@@ -1,11 +1,9 @@
 //Garima Roy
 //2110994840
-//3.1P
-
 // DHT sensor library - Version: Latest 
 #include "thingProperties.h"
 #include <DHT.h>
-#include <DHT_U.h>
+// #include <DHT_U.h>
 
 #define DHTPIN 10
 #define DHTTYPE DHT22
@@ -19,8 +17,7 @@ DHT dht(DHTPIN, DHTTYPE);
 
   The following variables are automatically generated and updated when changes are made to the Thing
 
-  CloudTemperatureSensor temperature;
-  CloudRelativeHumidity humidity;
+  float temperature;
   bool lED;
 
   Variables which are marked as READ/WRITE in the Cloud Thing will also have functions
@@ -54,23 +51,18 @@ void setup() {
   ArduinoCloud.printDebugInfo();
 }
 
-int ch;
-float hum;
-float temp;
+// int ch;
+// float hum;
+// float temp;
 
 void loop()
 {
   ArduinoCloud.update();
   // Your code here 
-    hum = dht.readHumidity();
-    temp = dht.readTemperature();
-    Serial.print("Humidity: ");
-    Serial.print(hum);
-    Serial.print(" %, Temp: ");
-    Serial.print(temp);
-    Serial.println(" Celsius");
-    delay(10000); //Delay 2 sec.
-    temperature = temp;
+    //hum = dht.readHumidity();
+    temperature = dht.readTemperature();
+    Serial.print(temperature);
+    onLEDChange();
 }
 
 
@@ -79,9 +71,9 @@ void loop()
   Since Humidity is READ_WRITE variable, onHumidityChange() is
   executed every time a new value is received from IoT Cloud.
 */
-void onHumidityChange()  {
-  // Add your code here to act upon Humidity change
-}
+// void onHumidityChange()  {
+//   // Add your code here to act upon Humidity change
+// }
 
 /*
   Since LED is READ_WRITE variable, onLEDChange() is
